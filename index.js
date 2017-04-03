@@ -54,17 +54,35 @@ app.post("/contacts",function(req,res){
     });
 });
 
-//Contact - show
-app.get("/contacts/:id",function(req,res){
-    Contact.findOne({_id:req.params.id},function(err,contact){
-        if(err) return res.json(err);
-        res.render("contact/show",{contact:contact});
-    })
+// Contacts - show // 3 
+app.get("/contacts/:id", function(req, res){
+ Contact.findOne({_id:req.params.id}, function(err, contact){
+  if(err) return res.json(err);
+  res.render("contacts/show", {contact:contact});
+ });
 });
-
-
-
+// Contacts - edit // 4 
+app.get("/contacts/:id/edit", function(req, res){
+ Contact.findOne({_id:req.params.id}, function(err, contact){
+  if(err) return res.json(err);
+  res.render("contacts/edit", {contact:contact});
+ });
+});
+// Contacts - update // 5 
+app.put("/contacts/:id", function(req, res){
+ Contact.findOneAndUpdate({_id:req.params.id}, req.body, function(err, contact){
+  if(err) return res.json(err);
+  res.redirect("/contacts/"+req.params.id);
+ });
+});
+// Contacts - destroy // 6
+app.delete("/contacts/:id", function(req, res){
+ Contact.remove({_id:req.params.id}, function(err, contact){
+  if(err) return res.json(err);
+  res.redirect("/contacts");
+ });
+});
 // Port setting
-app.listen(3000, function(){
+app.listen(5000, function(){
  console.log("server on!");
 });
