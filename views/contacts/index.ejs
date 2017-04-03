@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../partials/head %>
+        // 외부 ejs 호출
+    </head>
+    <body>
+        <% include ../partials/nav %>
+        <div class="contact contac-index">
+            <h2>Index</h2>
+            <ul>
+                <% contacts.forEach(function(contact){ %>
+                //forEach로 코드 반복 사용 
+                    <li>
+                        <%= contact.name %>
+                    </li>
+                    <li>
+                        <%= contact.email %>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+    </body>
+</html>
